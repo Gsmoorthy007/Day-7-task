@@ -42,23 +42,23 @@ request.onload=function (){
     })
 }
 
- let XMLHttpRequest = require('xhr2');
 
-let xhr = new XMLHttpRequest();
-var request = new XMLHttpRequest();
+
+
+ var request = new XMLHttpRequest();
 request.open('Get','https://restcountries.com/v3.1/all')
 request.send();
 request.onload = function () {
-        var data = JSON.parse(this.response);
-        var cur=[];
-        for(i=0;i<data.length;i++){
-            if(data[i].currencies[1].code==="USD")
-            {
-                console.log("name:",data[i].name,"==>",data[i].currencies[1].code)
-            }
-        }
-    }
-
-
+    const data = JSON.parse(request.response);
+const datas = data.filter((value) => {
+  return value.currencies
+})
+    console.log(datas)
+    datas.map(e=>{
+      if(e.currencies.hasOwnProperty("USD")){
+        console.log(e.name)
+      }
+    })
+}
 
 
